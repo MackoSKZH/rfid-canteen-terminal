@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <title>Výdaj jedla pre animátorov</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="section">
+        <div id="menu"></div>
+        <div class="order-summary" id="order-summary"></div>
+        <div class="pay-section">
+            <button onclick="startPayment()" class="fixed-pay-button">ZAPLATIŤ</button>
+            <!--<input id="card-input" type="text" placeholder="Načítaj kartu..." autocomplete="off" style="margin-top: 10px; display:none;" />-->
+            <input id="card-input" type="text" autocomplete="off" style="
+                position: absolute;
+                opacity: 0;
+                width: 1px;
+                height: 1px;
+                border: none;
+                padding: 0;
+                margin: 0;
+                z-index: -1;
+            " />
+
+            <div id="consume-status" style="margin-top: 10px;"></div>
+        </div>
+    </div>
+
+    <div class="section" id="register-section">
+        <h2>Registrácia nového animátora</h2>
+        <input type="text" id="register-uid" placeholder="Načítaj kartu" autocomplete="off">
+        <input type="text" id="register-name" placeholder="Zadaj meno" autocomplete="off">
+        <button onclick="register()">Registrovať</button>
+        <div id="register-status"></div>
+    </div>
+
+    <div class="section">
+        <h2>Zoznam animátorov</h2>
+        <button onclick="loadUsers()">🔄 Obnoviť zoznam</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Meno</th>
+                    <th>UID</th>
+                    <th>Body</th>
+                </tr>
+            </thead>
+            <tbody id="users-table-body"></tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/socket.io-client@4.7.2/dist/socket.io.min.js"></script>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
