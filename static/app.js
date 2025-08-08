@@ -14,7 +14,19 @@ function resetPayButton() {
     }
 }
 
-function showStatusMessage(element, message, duration = 3000, hideInput = true) {
+function flashOverlay(type = 'success') {
+    const overlay = document.getElementById('overlay-feedback');
+    if (!overlay) return;
+
+    overlay.className = type;
+    overlay.style.opacity = '1';
+
+    setTimeout(() => {
+        overlay.style.opacity = '0';
+    }, 500);
+}
+
+function showStatusMessage(element, message, duration = 500, hideInput = true) {
     element.innerText = message;
     setTimeout(() => {
         element.innerText = '';
@@ -146,6 +158,23 @@ document.getElementById('card-input').addEventListener('keydown', function (e) {
     }
 });
 
+document.getElementById('toggle-users').addEventListener('click', function () {
+    const section = document.getElementById('animator-list-section').parentElement.querySelector('.section:last-of-type');
+    const btn = this;
+
+    if (section.style.display === 'none' || section.style.display === '') {
+        section.style.display = 'block';
+        btn.innerText = 'Skryť animátorov';
+    } else {
+        section.style.display = 'none';
+        btn.innerText = 'Zobraziť animátorov';
+    }
+});
+
+document.getElementById('refresh-button').addEventListener('click', () => {
+    location.reload();
+});
+
 async function consume(uid) {
     const status = document.getElementById('consume-status');
 
@@ -169,11 +198,13 @@ async function consume(uid) {
         const out = await res.json();
 
         if (!res.ok) {
-            showStatusMessage(status, `${out.error}`, 3000, true);
+            flashOverlay('error');
+            showStatusMessage(status, `${out.error}`, 1000, true);
             return;
         }
 
-        showStatusMessage(status, `Zostáva bodov: ${out.points}`, 1000, true);
+        flashOverlay('success');
+        showStatusMessage(status, `Zostáva bodov: ${out.points}`, 500, true);
     } catch (err) {
         showStatusMessage(status, `Chyba komunikácie so serverom`, 3000, true);
         console.error(err);
