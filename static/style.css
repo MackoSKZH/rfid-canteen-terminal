@@ -7,6 +7,26 @@ h1, h2 {
     margin-bottom: 10px;
 }
 
+#overlay-feedback {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 9999;
+}
+
+#overlay-feedback.success {
+    background-color: rgba(0, 200, 0, 0.4);
+}
+
+#overlay-feedback.error {
+    background-color: rgba(255, 0, 0, 0.3);
+}
+
 .menu-button {
     font-size: 25px;
     padding: 20px;
@@ -21,10 +41,6 @@ h1, h2 {
 
 .menu-button:hover {
     background-color: #ddd;
-}
-
-.selected-item {
-    background-color: #d0ffd0;
 }
 
 .order-summary {
@@ -54,27 +70,12 @@ h1, h2 {
     height: 32px;
 }
 
-.pay-section button {
-    font-size: 24px;
-    padding: 16px 32px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-top: 20px;
-}
-
-.pay-section button:hover {
-    background-color: #218838;
-}
-
-
 .section {
     margin-bottom: 40px;
 }
 
-#register-section {
+#register-section,
+#animator-list-section {
     display: none;
 }
 
@@ -94,15 +95,22 @@ th {
     background-color: #eee;
 }
 
-.fixed-pay-button {
+.fixed-button-bar {
     position: fixed;
     bottom: 20px;
-    left: 20px;
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%);
     z-index: 999;
-    font-size: 24px;
-    padding: 16px 32px;
-    background-color: #28a745;
-    color: white;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.fixed-button-bar button {
+    font-size: 20px;
+    padding: 14px 24px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
@@ -110,6 +118,45 @@ th {
     transition: background-color 0.2s ease;
 }
 
+.fixed-pay-button {
+    background-color: #28a745;
+    color: white;
+}
 .fixed-pay-button:hover {
+    background-color: #218838;
+}
+
+.refresh-button {
+    background-color: #ffc107;
+    color: #000;
+}
+.refresh-button:hover {
+    background-color: #e0a800;
+}
+
+.toggle-users-button {
+    background-color: #007bff;
+    color: white;
+}
+.toggle-users-button:hover {
+    background-color: #0056b3;
+}
+
+.selected-item {
+    background-color: #d0ffd0;
+}
+
+.pay-section button {
+    font-size: 24px;
+    padding: 16px 32px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.pay-section button:hover {
     background-color: #218838;
 }
