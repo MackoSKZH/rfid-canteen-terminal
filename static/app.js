@@ -1,17 +1,24 @@
 let menu = [];
 let order = {};
 
+function resetPayButton() {
+    const input = document.getElementById('card-input');
+    const payButton = document.querySelector('.fixed-pay-button');
+    if (input) {
+        input.value = '';
+        input.style.display = 'none';
+    }
+    if (payButton) {
+        payButton.style.backgroundColor = '#28a745';
+        payButton.innerText = 'ZAPLATIŤ';
+    }
+}
+
 function showStatusMessage(element, message, duration = 3000, hideInput = true) {
     element.innerText = message;
     setTimeout(() => {
         element.innerText = '';
-        if (hideInput) {
-            const input = document.getElementById('card-input');
-            if (input) {
-                input.value = '';
-                input.style.display = 'none';
-            }
-        }
+        if (hideInput) resetPayButton();
     }, duration);
 }
 
@@ -25,8 +32,8 @@ async function fetchMenu() {
         const btn = document.createElement('button');
         btn.innerText = `${item.name} (${item.points}b)`;
         btn.className = 'menu-button';
-        btn.style.fontSize = '24px';           // zväčšenie tlačidiel
-        btn.style.padding = '25px 35px';       // väčší padding
+        btn.style.fontSize = '24px';
+        btn.style.padding = '25px 35px';
         btn.onclick = () => addToOrder(item.name, item.points);
         menuDiv.appendChild(btn);
     });
@@ -96,19 +103,10 @@ function updateOrderUI() {
 }
 
 function cancelPendingPayment() {
-    const input = document.getElementById('card-input');
+    resetPayButton();
     const status = document.getElementById('consume-status');
-    const payButton = document.querySelector('.fixed-pay-button');
 
-    if (input.style.display === 'block') {
-        input.style.display = 'none';
-        input.value = '';
-        status.innerText = '';
-        if (payButton) {
-            payButton.style.backgroundColor = '#28a745';
-            payButton.innerText = 'ZAPLATIŤ';
-        }
-    }
+    if (status) status.innerText = '';
 }
 
 function startPayment() {
@@ -118,13 +116,8 @@ function startPayment() {
     const payButton = document.querySelector('.fixed-pay-button');
 
     if (input.style.display === 'block') {
-        input.style.display = 'none';
-        input.value = '';
+        resetPayButton();
         status.innerText = '';
-        if (payButton) {
-            payButton.style.backgroundColor = '#28a745';
-            payButton.innerText = 'ZAPLATIŤ';
-        }
         return;
     }
 
@@ -155,7 +148,6 @@ document.getElementById('card-input').addEventListener('keydown', function (e) {
 
 async function consume(uid) {
     const status = document.getElementById('consume-status');
-    const input = document.getElementById('card-input');
 
     const items = [];
     Object.entries(order).forEach(([name, data]) => {
@@ -188,12 +180,7 @@ async function consume(uid) {
         return;
     }
 
-    const payButton = document.querySelector('.fixed-pay-button');
-    if (payButton) {
-        payButton.style.backgroundColor = '#28a745';
-        payButton.innerText = 'ZAPLATIŤ';
-    }
-
+    resetPayButton();
     order = {};
     updateOrderUI();
     loadUsers();
