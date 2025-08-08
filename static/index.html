@@ -6,12 +6,17 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
+    <div id="overlay-feedback"></div>
     <div class="section">
         <div id="menu"></div>
         <div class="order-summary" id="order-summary"></div>
         <div class="pay-section">
-            <button onclick="startPayment()" class="fixed-pay-button">ZAPLATIŤ</button>
-            <!--<input id="card-input" type="text" placeholder="Načítaj kartu..." autocomplete="off" style="margin-top: 10px; display:none;" />-->
+            <div class="fixed-button-bar">
+                <button onclick="startPayment()" class="fixed-pay-button">ZAPLATIŤ</button>
+                <button id="refresh-button" class="refresh-button">OBNOVIŤ</button>
+                <button id="toggle-users" class="toggle-users-button">Zobraziť animátorov</button>
+            </div>
+            
             <input id="card-input" type="text" autocomplete="off" style="
                 position: absolute;
                 opacity: 0;
@@ -35,7 +40,7 @@
         <div id="register-status"></div>
     </div>
 
-    <div class="section">
+    <div class="section" id="animator-list-section">
         <h2>Zoznam animátorov</h2>
         <button onclick="loadUsers()">🔄 Obnoviť zoznam</button>
         <table>
