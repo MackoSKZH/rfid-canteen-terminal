@@ -42,10 +42,10 @@ async function fetchMenu() {
     menuDiv.innerHTML = '';
     menu.forEach(item => {
         const btn = document.createElement('button');
-        btn.innerText = `${item.name} (${item.points}b)`;
+        btn.innerText = `${item.name} ${item.points}`;
         btn.className = 'menu-button';
-        btn.style.fontSize = '24px';
-        btn.style.padding = '25px 35px';
+        btn.style.fontSize = '35px';
+        btn.style.padding = '20px';
         btn.onclick = () => addToOrder(item.name, item.points);
         menuDiv.appendChild(btn);
     });
