@@ -1,8 +1,8 @@
 [
     { "name": "Velka Kofola", "points": 10 },
     { "name": "Mala Kofola", "points": 5 },
-    { "name": "Klasicka Palacinka", "points": 20 },
-    { "name": "Dubajska Palacinka", "points": 50},
+    { "name": "Palacinka", "points": 20 },
+    { "name": "Dubajska", "points": 50},
     { "name": "Churros", "points": 20 },
     { "name": "Cukrova Vata", "points": 15}
 ]
