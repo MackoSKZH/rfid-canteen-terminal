@@ -27,7 +27,8 @@ h1, h2 {
     background-color: rgba(255, 0, 0, 0.3);
 }
 
-.menu-button {
+.menu-button,
+.points-button {
     font-size: 35px;
     padding: 20px;
     margin: 10px;
@@ -39,7 +40,8 @@ h1, h2 {
     transition: 0.2s;
 }
 
-.menu-button:hover {
+.menu-button:hover,
+.points-button {
     background-color: #ddd;
 }
 
@@ -58,7 +60,7 @@ h1, h2 {
 .order-item span {
     font-size: 18px;
 }
-
+    
 .counter {
     display: flex;
     gap: 10px;
@@ -68,6 +70,17 @@ h1, h2 {
     font-size: 18px;
     width: 32px;
     height: 32px;
+}
+
+.hidden-input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    border: none;
+    padding: 0;
+    margin: 0;
+    z-index: -1;
 }
 
 .section {
@@ -159,4 +172,21 @@ th {
 
 .pay-section button:hover {
     background-color: #218838;
+}
+
+.mode-button {
+    font-size: 35px;
+    padding: 20px;
+    margin: 10px;
+    min-width: 150px;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    background-color: #f0f0f0;
+    transition: 0.2s;
+}
+
+#credit-topup,
+#credit-consume {
+    display: none;
 }

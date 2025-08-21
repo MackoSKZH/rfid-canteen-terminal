@@ -2,61 +2,69 @@
 <html lang="sk">
 <head>
     <meta charset="UTF-8">
-    <title>Výdaj jedla pre animátorov</title>
+    <title>RFID Terminal</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <div id="overlay-feedback"></div>
-    <div class="section">
-        <div id="menu"></div>
-        <div class="order-summary" id="order-summary"></div>
-        <div class="pay-section">
-            <div class="fixed-button-bar">
-                <button onclick="startPayment()" class="fixed-pay-button">ZAPLATIŤ</button>
-                <button id="refresh-button" class="refresh-button">OBNOVIŤ</button>
-                <button id="toggle-users" class="toggle-users-button">Zobraziť animátorov</button>
-            </div>
-            
-            <input id="card-input" type="text" autocomplete="off" style="
-                position: absolute;
-                opacity: 0;
-                width: 1px;
-                height: 1px;
-                border: none;
-                padding: 0;
-                margin: 0;
-                z-index: -1;
-            " />
+    <button class="mode-button" id="mode-topup">Dobijanie</button>
+    <button class="mode-button" id="mode-consume">Stanok</button>
 
-            <div id="consume-status" style="margin-top: 10px;"></div>
+    <div id="credit-topup">
+        <div class="section" id="register-section">
+            <h2>Registrácia nového animátora</h2>
+            <input type="text" id="register-uid" placeholder="Načítaj kartu" autocomplete="off">
+            <input type="text" id="register-name" placeholder="Zadaj meno" autocomplete="off">
+            <button onclick="register()">Registrovať</button>
+            <div id="register-status"></div>
+        </div>
+
+        <div class="section">
+            <div id="points-menu"></div>
+            <div style="margin-top:10px;">
+                <input id="topup-card-input" type="text" autocomplete="off" class="hidden-input" />
+                <div id="topup-status" style="margin-top: 10px;"></div>
+            </div>
         </div>
     </div>
 
-    <div class="section" id="register-section">
-        <h2>Registrácia nového animátora</h2>
-        <input type="text" id="register-uid" placeholder="Načítaj kartu" autocomplete="off">
-        <input type="text" id="register-name" placeholder="Zadaj meno" autocomplete="off">
-        <button onclick="register()">Registrovať</button>
-        <div id="register-status"></div>
-    </div>
+    <div id="credit-consume">
+        <div id="overlay-feedback"></div>
+        <div class="section">
+            <div id="menu"></div>
+            <div class="order-summary" id="order-summary"></div>
+            <div class="pay-section">
+                <div class="fixed-button-bar">
+                    <button onclick="startPayment()" class="fixed-pay-button">ZAPLATIŤ</button>
+                    <button id="refresh-button" class="refresh-button">OBNOVIŤ</button>
+                    <button id="toggle-users" class="toggle-users-button">Zobraziť animátorov</button>
+                </div>
+                
+                <input id="card-input" type="text" autocomplete="off" class="hidden-input" />
 
-    <div class="section" id="animator-list-section">
-        <h2>Zoznam animátorov</h2>
-        <button onclick="loadUsers()">🔄 Obnoviť zoznam</button>
-        <table>
-            <thead>
-                <tr>
-                    <th>Meno</th>
-                    <th>UID</th>
-                    <th>Body</th>
-                </tr>
-            </thead>
-            <tbody id="users-table-body"></tbody>
-        </table>
+                <div id="consume-status" style="margin-top: 10px;"></div>
+            </div>
+        </div>
+
+        <div class="section" id="animator-list-section">
+            <h2>Zoznam animátorov</h2>
+            <button onclick="loadUsers()">🔄 Obnoviť zoznam</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Meno</th>
+                        <th>UID</th>
+                        <th>Body</th>
+                    </tr>
+                </thead>
+                <tbody id="users-table-body"></tbody>
+            </table>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/socket.io-client@4.7.2/dist/socket.io.min.js"></script>
 
     <script src="/static/app.js"></script>
+    <script src="/static/consume.js"></script>
+    <script src="/static/topup.js"></script>
 </body>
 </html>
